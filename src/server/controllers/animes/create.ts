@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
 import * as yup from 'yup';
+import fs from 'fs';
 
 interface IAnime {
+	// id: string;
 	name: string;
 	episodes: number;
 	seasons: number;
@@ -17,6 +19,8 @@ const bodyValidation: yup.ObjectSchema<IAnime> = yup.object().shape({
 	note: yup.number().required().min(0),
 });
 
+const animesFile = 'src/server/database/animes.json';
+
 export const create = async (req: Request<{}, {}, IAnime>, res: Response) => {
 	let validateData: IAnime | undefined = undefined;
 
@@ -31,6 +35,28 @@ export const create = async (req: Request<{}, {}, IAnime>, res: Response) => {
 			},
 		});
 	}
+
+	let animes: IAnime[] = [];
+	try {
+		const data = fs.readFileSync(animesFile, 'utf-8');
+		animes = JSON.parse(data);
+	} catch (error) {
+		console.log('Erro ao ler o arquivo JSON:', error);
+		return res.status(500).json({ error: 'Error interno do servidor' });
+	}
+
+	//Adiciona o anime validado ao array de animes
+	animes.push(validateData);
+
+	//Escreve o array atualizado no arquivo JSON
+	try {
+		fs.writeFileSync(animesFile, JSON.stringify(animes, null, 2));
+		console.log('Anime inserido');
+	} catch (error) {
+		console.log('Erro ao escrever no arquivo JSON:', error);
+		return res.status(500).json({ error: 'Erro interno do servidor' });
+	}
+
 	console.log(validateData);
-	return res.send(`Anime ${validateData.name} created`);
+	return res.json(validateData);
 };
