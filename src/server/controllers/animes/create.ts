@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import * as yup from 'yup';
 import fs from 'fs';
+import { randomBytes } from 'crypto';
 
 interface IAnime {
-	// id: string;
+	id: string;
 	name: string;
 	episodes: number;
 	seasons: number;
@@ -12,7 +13,7 @@ interface IAnime {
 
 //Realiza uma validação no corpo da requisição
 
-const bodyValidation: yup.ObjectSchema<IAnime> = yup.object().shape({
+const bodyValidation: yup.ObjectSchema<Omit<IAnime, 'id'>> = yup.object().shape({
 	name: yup.string().required().min(1),
 	episodes: yup.number().required().min(1),
 	seasons: yup.number().required().min(1),
@@ -25,7 +26,10 @@ export const create = async (req: Request<{}, {}, IAnime>, res: Response) => {
 	let validateData: IAnime | undefined = undefined;
 
 	try {
-		validateData = await bodyValidation.validate(req.body);
+		validateData = (await bodyValidation.validate(req.body, { stripUnknown: true })) as IAnime;
+
+		const id = randomBytes(8).toString('hex');
+		validateData.id = id;
 	} catch (error) {
 		const yupError = error as yup.ValidationError;
 
