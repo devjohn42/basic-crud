@@ -1,15 +1,12 @@
-import { Request, Response } from 'express';
-import * as yup from 'yup';
-import fs from 'fs';
 import { randomBytes } from 'crypto';
+import fs from 'fs';
 
-interface IAnime {
-	id: string;
-	name: string;
-	episodes: number;
-	seasons: number;
-	note: number;
-}
+import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
+import * as yup from 'yup';
+
+import { ANIMES_FILE_PATH } from '../../constants/constants';
+import { IAnime } from '../../interfaces/anime';
 
 //Realiza uma validação no corpo da requisição
 
@@ -19,8 +16,6 @@ const bodyValidation: yup.ObjectSchema<Omit<IAnime, 'id'>> = yup.object().shape(
 	seasons: yup.number().required().min(1),
 	note: yup.number().required().min(0),
 });
-
-const animesFile = 'src/server/database/animes.json';
 
 export const create = async (req: Request<{}, {}, IAnime>, res: Response) => {
 	let validateData: IAnime | undefined = undefined;
@@ -42,11 +37,13 @@ export const create = async (req: Request<{}, {}, IAnime>, res: Response) => {
 
 	let animes: IAnime[] = [];
 	try {
-		const data = fs.readFileSync(animesFile, 'utf-8');
+		const data = fs.readFileSync(ANIMES_FILE_PATH, 'utf-8');
 		animes = JSON.parse(data);
 	} catch (error) {
 		console.log('Erro ao ler o arquivo JSON:', error);
-		return res.status(500).json({ error: 'Error interno do servidor' });
+		return res
+			.status(StatusCodes.INTERNAL_SERVER_ERROR)
+			.json({ error: 'Error interno do servidor' });
 	}
 
 	//Adiciona o anime validado ao array de animes
@@ -54,7 +51,7 @@ export const create = async (req: Request<{}, {}, IAnime>, res: Response) => {
 
 	//Escreve o array atualizado no arquivo JSON
 	try {
-		fs.writeFileSync(animesFile, JSON.stringify(animes, null, 2));
+		fs.writeFileSync(ANIMES_FILE_PATH, JSON.stringify(animes, null, 2));
 		console.log('Anime inserido');
 	} catch (error) {
 		console.log('Erro ao escrever no arquivo JSON:', error);

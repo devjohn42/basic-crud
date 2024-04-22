@@ -1,1 +1,142 @@
-[] 
+[
+	{
+		"id": "6674b0b43ed1c95f",
+		"note": 7.5,
+		"seasons": 1,
+		"episodes": 12,
+		"name": "Death Parade"
+	},
+	{
+		"id": "37f1a92bf8e9b7c3",
+		"note": 8.2,
+		"seasons": 3,
+		"episodes": 24,
+		"name": "Attack on Titan"
+	},
+	{
+		"id": "9f8d7e6c5b4a3f2e",
+		"note": 9.0,
+		"seasons": 2,
+		"episodes": 37,
+		"name": "My Hero Academia"
+	},
+	{
+		"id": "4e7d9c8b3a6f5d2e",
+		"note": 8.7,
+		"seasons": 5,
+		"episodes": 112,
+		"name": "Naruto"
+	},
+	{
+		"id": "1a2b3c4d5e6f7g8h",
+		"note": 9.5,
+		"seasons": 4,
+		"episodes": 93,
+		"name": "One Piece"
+	},
+	{
+		"id": "a1b2c3d4e5f6g7h8",
+		"note": 8.9,
+		"seasons": 3,
+		"episodes": 75,
+		"name": "Demon Slayer"
+	},
+	{
+		"id": "1b2c3d4e5f6g7h8i",
+		"note": 9.2,
+		"seasons": 2,
+		"episodes": 50,
+		"name": "Fullmetal Alchemist: Brotherhood"
+	},
+	{
+		"id": "2c3d4e5f6g7h8i9j",
+		"note": 8.6,
+		"seasons": 3,
+		"episodes": 64,
+		"name": "Tokyo Ghoul"
+	},
+	{
+		"id": "3d4e5f6g7h8i9j0k",
+		"note": 8.8,
+		"seasons": 2,
+		"episodes": 48,
+		"name": "Death Note"
+	},
+	{
+		"id": "4e5f6g7h8i9j0k1l",
+		"note": 9.1,
+		"seasons": 1,
+		"episodes": 26,
+		"name": "Steins;Gate"
+	},
+	{
+		"id": "5f6g7h8i9j0k1l2m",
+		"note": 8.4,
+		"seasons": 2,
+		"episodes": 37,
+		"name": "Hunter x Hunter"
+	},
+	{
+		"id": "6g7h8i9j0k1l2m3n",
+		"note": 8.3,
+		"seasons": 1,
+		"episodes": 25,
+		"name": "Sword Art Online"
+	},
+	{
+		"id": "7h8i9j0k1l2m3n4o",
+		"note": 8.0,
+		"seasons": 1,
+		"episodes": 12,
+		"name": "One Punch Man"
+	},
+	{
+		"id": "8i9j0k1l2m3n4o5p",
+		"note": 8.5,
+		"seasons": 1,
+		"episodes": 13,
+		"name": "Cowboy Bebop"
+	},
+	{
+		"id": "9j0k1l2m3n4o5p6q",
+		"note": 9.3,
+		"seasons": 2,
+		"episodes": 24,
+		"name": "Code Geass"
+	},
+	{
+		"id": "0k1l2m3n4o5p6q7r",
+		"note": 8.1,
+		"seasons": 2,
+		"episodes": 37,
+		"name": "Dragon Ball Z"
+	},
+	{
+		"id": "1l2m3n4o5p6q7r8s",
+		"note": 9.4,
+		"seasons": 3,
+		"episodes": 52,
+		"name": "Fairy Tail"
+	},
+	{
+		"id": "2m3n4o5p6q7r8s9t",
+		"note": 8.7,
+		"seasons": 1,
+		"episodes": 24,
+		"name": "Black Clover"
+	},
+	{
+		"id": "3n4o5p6q7r8s9t0u",
+		"note": 8.2,
+		"seasons": 1,
+		"episodes": 24,
+		"name": "Your Lie in April"
+	},
+	{
+		"id": "4o5p6q7r8s9t0u1v",
+		"note": 9.2,
+		"seasons": 1,
+		"episodes": 12,
+		"name": "Attack on Titan: Final Season"
+	}
+]
