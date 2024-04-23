@@ -7,10 +7,13 @@ import * as yup from 'yup';
 
 import { ANIMES_FILE_PATH } from '../../constants/constants';
 import { IAnime } from '../../interfaces/anime';
+import { idGenerator } from '../../utils/idGenerator';
 
 //Realiza uma validação no corpo da requisição
 
-const bodyValidation: yup.ObjectSchema<Omit<IAnime, 'id'>> = yup.object().shape({
+type ID = 'id' | 'rootId';
+
+const bodyValidation: yup.ObjectSchema<Omit<IAnime, ID>> = yup.object().shape({
 	name: yup.string().required().min(1),
 	episodes: yup.number().required().min(1),
 	seasons: yup.number().required().min(1),
@@ -23,8 +26,10 @@ export const create = async (req: Request<{}, {}, IAnime>, res: Response) => {
 	try {
 		validateData = (await bodyValidation.validate(req.body, { stripUnknown: true })) as IAnime;
 
-		const id = randomBytes(8).toString('hex');
-		validateData.id = id;
+		const rootId = randomBytes(8).toString('hex');
+		validateData.rootId = rootId;
+
+		validateData.id = idGenerator().toString();
 	} catch (error) {
 		const yupError = error as yup.ValidationError;
 
