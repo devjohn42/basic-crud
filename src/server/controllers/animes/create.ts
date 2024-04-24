@@ -29,7 +29,7 @@ export const create = async (req: Request<{}, {}, IAnime>, res: Response) => {
 		const rootId = randomBytes(8).toString('hex');
 		validateData.rootId = rootId;
 
-		validateData.id = idGenerator().toString();
+		validateData.id = idGenerator();
 	} catch (error) {
 		const yupError = error as yup.ValidationError;
 
@@ -48,21 +48,25 @@ export const create = async (req: Request<{}, {}, IAnime>, res: Response) => {
 		console.log('Erro ao ler o arquivo JSON:', error);
 		return res
 			.status(StatusCodes.INTERNAL_SERVER_ERROR)
-			.json({ error: 'Error interno do servidor' });
+			.json({ error: 'Erro interno do servidor' });
 	}
 
-	//Adiciona o anime validado ao array de animes
-	animes.push(validateData);
-
-	//Escreve o array atualizado no arquivo JSON
 	try {
-		fs.writeFileSync(ANIMES_FILE_PATH, JSON.stringify(animes, null, 2));
-		console.log('Anime inserido');
-	} catch (error) {
-		console.log('Erro ao escrever no arquivo JSON:', error);
-		return res.status(500).json({ error: 'Erro interno do servidor' });
-	}
+		const lastAnime = animes[animes.length - 1];
+		const lastId = lastAnime ? lastAnime.id : 0;
 
+		const newId = lastId + 1;
+		validateData.id = newId;
+
+		animes.push(validateData);
+
+		fs.writeFileSync(ANIMES_FILE_PATH, JSON.stringify(animes, null, 2));
+	} catch (error) {
+		console.log('Erro ao inserir o anime ao arquivo JSON: ', error);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+			error: 'Erro interno no servidor',
+		});
+	}
 	console.log(validateData);
 	return res.json(validateData);
 };

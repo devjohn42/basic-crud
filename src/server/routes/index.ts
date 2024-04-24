@@ -11,5 +11,6 @@ router.get('/', (_, res) => {
 router.post('/create-anime', AnimesController.create);
 router.get('/animes', AnimesController.getAll);
 router.get('/anime/:id', AnimesController.getById);
+router.delete('/delete-anime/:id', AnimesController.deleteById);
 
 export { router };

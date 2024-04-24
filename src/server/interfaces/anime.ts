@@ -1,5 +1,5 @@
 export interface IAnime {
-	id: string;
+	id: number;
 	rootId: string;
 	name: string;
 	episodes: number;

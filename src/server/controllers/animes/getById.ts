@@ -6,28 +6,25 @@ import * as yup from 'yup';
 
 import { ANIMES_FILE_PATH } from '../../constants/constants';
 import { IAnime } from '../../interfaces/anime';
+import { IByIdProps } from '../../interfaces/byId';
 
-interface IQueryProps {
-	id?: string | null;
-}
-
-export const getByIdValidation = async (req: Request<IQueryProps>) => {
+export const getByIdValidation = async (req: Request<IByIdProps>) => {
 	await yup
 		.object()
 		.shape({
-			id: yup.string().required().trim().matches(/^\d+$/),
+			id: yup.number().required().integer().moreThan(0),
 		})
 		.validate(req.params);
 };
 
-export const getById = async (req: Request<IQueryProps>, res: Response) => {
+export const getById = async (req: Request<IByIdProps>, res: Response) => {
 	try {
 		await getByIdValidation(req);
 	} catch (error) {
 		return res.status(StatusCodes.BAD_REQUEST).json({ error: 'Requisição feita de forma errada' });
 	}
 
-	const animeId = req.params.id;
+	const animeId = Number(req.params.id);
 
 	let anime: IAnime | undefined;
 	try {
@@ -36,9 +33,9 @@ export const getById = async (req: Request<IQueryProps>, res: Response) => {
 
 		anime = animes.find((a) => a.id === animeId);
 	} catch (error) {
-		console.log('Error ao ler o arquivo JSON:', error);
+		console.log('Erro ao ler o arquivo JSON:', error);
 		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-			error: 'Error interno do servidor',
+			error: 'Erro interno do servidor',
 		});
 	}
 
