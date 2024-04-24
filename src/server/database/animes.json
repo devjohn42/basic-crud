@@ -1,16 +1,16 @@
 [
   {
-    "note": 7.5,
-    "seasons": 1,
-    "episodes": 12,
-    "name": "Death Parade",
+    "note": "7.5",
+    "seasons": "1",
+    "episodes": "12",
+    "name": "Akudama Drive",
     "rootId": "72662cd35cc5d9ae",
     "id": 1
   },
   {
-    "note": 7.5,
-    "seasons": 1,
-    "episodes": 12,
+    "note": "10.0",
+    "seasons": "2",
+    "episodes": "12",
     "name": "Akudama Drive",
     "rootId": "0bd74e85f56c7c24",
     "id": 2
