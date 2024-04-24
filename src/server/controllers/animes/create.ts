@@ -68,5 +68,5 @@ export const create = async (req: Request<{}, {}, IAnime>, res: Response) => {
 		});
 	}
 	console.log(validateData);
-	return res.json(validateData);
+	return res.status(StatusCodes.CREATED).json(validateData.id);
 };

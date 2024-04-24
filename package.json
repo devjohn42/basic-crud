@@ -1,7 +1,7 @@
 {
 	"name": "basic-crud",
 	"version": "1.0.0",
-	"description": "",
+	"description": "Uma simples api-rest",
 	"main": "index.js",
 	"scripts": {
 		"server:dev": "ts-node-dev ./src/index.ts",
